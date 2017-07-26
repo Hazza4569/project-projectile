@@ -27,30 +27,13 @@ var two = new Two(params).appendTo(elem);
 
 var theCanvas = document.getElementById("vidCanvas")
 var ctx = theCanvas.getContext('2d');
-ctx.lineWidth = 2;
+ctx.lineWidth = 5;
 ctx.strokeStyle = "blue";
 var v = document.getElementById("vid");
 
 var xscale = 2.13;
 var yscale = 2.4;
 
-/*ctx.beginPath();
-ctx.moveTo(0,0);
-ctx.lineTo(640/xscale,360/yscale);
-ctx.stroke();*/
-
-/*var circle = two.makeCircle(72, 100, 50);
-var rect = two.makeRectangle(300, 100, 100, 100);
-
-circle.fill = '#FF8000';
-circle.stroke = 'orangered'; // Accepts all valid css color
-circle.linewidth = 5;
-
-rect.fill = 'rgb(0, 200, 255)';
-rect.opacity = 0.75;
-rect.noStroke();*/
-
-//parabolaMaker();
 var t = 1;
 var x,y;
 [x,y] = getPoints();
@@ -68,21 +51,11 @@ function Run()
 
 	v.play();
 	t=1;
-	setInterval(initiateAnimation, 200);
+	setInterval(animateParabola, 350);
 	running = true;
 
 
 };
-
-
-
-
-
-function initiateAnimation()
-{
-	animateParabola();
-
-}
 
 
 //t = 1;
@@ -102,13 +75,13 @@ function animateParabola()
 {
 	if (t< x.length - 1)
 	{
-		if (t<100/xscale)
+		if (t<80/xscale)
 		{
 			setInterval(animateParabola,29*t);
 		}
 		else
 		{
-			setInterval(animateParabola,70*t);
+			setInterval(animateParabola,80*t);
 		}
 	}
 
