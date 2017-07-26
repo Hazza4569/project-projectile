@@ -1,26 +1,6 @@
 var w = 640; var h = 360;
 var clearing = false;
 
-/*(function () {
-    var lastTime = 0;
-
-    if (!window.requestAnimationFrame) window.requestAnimationFrame = function (callback, element) {
-        var currTime = new Date().getTime();
-        var timeToCall = Math.max(0, 1 - (currTime - lastTime));
-        timeToCall = 0; currTime = 1;
-        var id = window.setTimeout(function () {
-            callback(currTime + timeToCall);
-        },
-        timeToCall);
-        lastTime = currTime + timeToCall;
-        return id;
-    };
-
-    if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function (id) {
-        clearTimeout(id);
-    };
-    }()); */
-
 var elem = document.getElementById("mydiv");
 var params = { width: w, height: h };
 var two = new Two(params).appendTo(elem);
@@ -38,10 +18,6 @@ var t = 1;
 var x,y;
 [x,y] = getPoints();
 
-//var parab = getPoints();
-//console.log(x,y);
-// animateParabola();
-
 
 function Run()
 	{
@@ -50,13 +26,11 @@ function Run()
 	clearing = false;
 	};
 
-
 	v.play();
 	setInterval(animateParabola, 350);
 	if(document.querySelector('vid').playing == false){
     clearing = true;
   }
-
 
 
 };
@@ -89,18 +63,13 @@ function animateParabola()
 		}
 	}
 
-	// for (var j=0;j>2000;j++)
-	// {
-	// 	console.log(j);
-	// }
-
 	ctx.beginPath();
 	ctx.moveTo(x[t-1],y[t-1]);
 	ctx.lineTo(x[t],y[t]);
 	ctx.stroke();
 
 	t++
-	//makeBorders();
+	makeBorders();
 }
 
 
