@@ -1,4 +1,5 @@
 var w = 640; var h = 360;
+var running = false;
 
 /*(function () {
     var lastTime = 0;
@@ -24,9 +25,11 @@ var elem = document.getElementById("mydiv");
 var params = { width: w, height: h };
 var two = new Two(params).appendTo(elem);
 
-var ctx = document.getElementById("vidCanvas").getContext('2d');
+var theCanvas = document.getElementById("vidCanvas")
+var ctx = theCanvas.getContext('2d');
 ctx.lineWidth = 2;
 ctx.strokeStyle = "blue";
+var v = document.getElementById("vid");
 
 var xscale = 2.13;
 var yscale = 2.4;
@@ -55,14 +58,30 @@ var x,y;
 //var parab = getPoints();
 //console.log(x,y);
 // animateParabola();
-window.setTimeout(initiateAnimation, 300);
+
+
+function Run()
+	{
+	if(running == true){
+		ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
+	}
+
+	v.play();
+	t=1;
+	setInterval(initiateAnimation, 200);
+	running = true;
+
+
+};
+
+
+
+
 
 function initiateAnimation()
-{	
-	// for (var i=0; i<3;i++)
-	// {
-		animateParabola();
-	// }
+{
+	animateParabola();
+
 }
 
 
@@ -134,7 +153,7 @@ function parabolaMaker()
 		var x=i;
 		var y=11561*x*x/7811120 - 8473069*x/7811120 + 296;
 		points[i] = new Two.Vector(x,y);
-		
+
 	}
 
 	var line = [];
@@ -164,7 +183,7 @@ function getPoints()
 		y[i]=11561*x[i]*x[i]/7811120 - 8473069*x[i]/7811120 + 296;
 		//points[i] = new Two.Vector(x[i]*w/640,y[i]*h/360);
 		x[i] = x[i]*w/640/xscale; y[i] = y[i]*h/360/yscale;
-		
+
 	}
 	return [x,y];
 }
@@ -200,10 +219,10 @@ curve2.noFill();
 curve3.noFill();
 curve4.noFill();
 two.update();*/
-/*401, 110  
-130, 198  
-303, 115  
-575, 167  
+/*401, 110
+130, 198
+303, 115
+575, 167
 13, 303*/
 
 

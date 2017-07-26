@@ -12,6 +12,7 @@
 				position:absolute;
 				left:0px;
 				top:0px;
+				z-index: -1;
 			}
 
 			#vidCanvas {
@@ -21,6 +22,7 @@
 				position:absolute;
 				left:0px;
 				top:0px;
+				z-index: -2;
 			}
 
 			#vid {
@@ -28,15 +30,17 @@
 				position:absolute;
 				left:0px;
 				top:0px;
+				z-index: -2;
 			}
 
 
-
-
 		</style>
+
 	</head>
+
 	<body>
-		<video id="vid" width="640" height="360" autoplay> 
+
+		<video id="vid" width="640" height="360">
 			<source src="projectile1.mp4" type="video/mp4">
 			<source src="projectile1.webm" type="video/webm">
 			This video is not supported by your browser.
@@ -44,11 +48,14 @@
 
 		<canvas id="vidCanvas"></canvas>
 
+
 		<div id ="mydiv"></div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 		<script src = "twoMain.js"></script>
-		<!-- // <script src = "chartMain.js"></script> -->
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<div id="notmydiv">
+		<input id="Button" type="button" value="Start"  onclick="Run();"/>
+		</div>
 	</body>
 </html>
