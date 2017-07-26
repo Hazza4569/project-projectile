@@ -1,5 +1,5 @@
 var w = 640; var h = 360;
-var clearing = false;
+var firstplay = true;
 
 var elem = document.getElementById("mydiv");
 var params = { width: w, height: h };
@@ -17,22 +17,18 @@ var yscale = 2.4;
 var t = 1;
 var x,y;
 [x,y] = getPoints();
-
+console.log(v.ended);
 
 function Run()
+{
+	if(firstplay || v.ended)
 	{
-	if(clearing = true){
-	ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
-	clearing = false;
-	};
-
-	v.play();
-	setInterval(animateParabola, 350);
-	if(document.querySelector('vid').playing == false){
-    clearing = true;
-  }
-
-
+		firstplay = false
+		ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
+		v.play();
+		setInterval(animateParabola, 350);
+		t=1;
+	}	
 };
 
 
@@ -137,12 +133,12 @@ function getPoints()
 function makeBorders()
 {
 	var top = two.makeRectangle(320,0,640,10);
-	top.fill = 'white'
-	top.noStroke()
+	top.fill = 'white';
+	top.noStroke();
 
 	var bottom = two.makeRectangle(0,180,10,360);
-	bottom.fill = 'white'
-	bottom.noStroke()
+	bottom.fill = 'white';
+	bottom.noStroke();
 }
 
 
