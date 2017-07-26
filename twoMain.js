@@ -1,5 +1,5 @@
 var w = 640; var h = 360;
-var running = false;
+var clearing = false;
 
 /*(function () {
     var lastTime = 0;
@@ -45,14 +45,18 @@ var x,y;
 
 function Run()
 	{
-	if(running == true){
-		ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
-	}
+	if(clearing = true){
+	ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
+	clearing = false;
+	};
+
 
 	v.play();
-	t=1;
 	setInterval(animateParabola, 350);
-	running = true;
+	if(document.querySelector('vid').playing == false){
+    clearing = true;
+  }
+
 
 
 };
@@ -63,12 +67,12 @@ function Run()
 //animateAxes();
 
 
-function printMousePos(event)
-{
- 	console.log(event.clientX,event.clientY);
-}
-
-document.addEventListener("click", printMousePos);
+// function printMousePos(event)
+// {
+//  	console.log(event.clientX,event.clientY);
+// }
+//
+// document.addEventListener("click", printMousePos);
 
 
 function animateParabola()
@@ -85,10 +89,10 @@ function animateParabola()
 		}
 	}
 
-	for (var j=0;j>2000;j++)
-	{
-		console.log(j);
-	}
+	// for (var j=0;j>2000;j++)
+	// {
+	// 	console.log(j);
+	// }
 
 	ctx.beginPath();
 	ctx.moveTo(x[t-1],y[t-1]);
