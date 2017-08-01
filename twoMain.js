@@ -1,5 +1,6 @@
 var w = 640; var h = 360;
-var firstplay = true;
+var vidDone = true;
+var runs = 0;
 
 var elem = document.getElementById("mydiv");
 var params = { width: w, height: h };
@@ -10,25 +11,26 @@ var ctx = theCanvas.getContext('2d');
 ctx.lineWidth = 5;
 ctx.strokeStyle = "blue";
 var v = document.getElementById("vid");
+v.addEventListener('ended',onVidEnd,false);
 
 var xscale = 2.13;
 var yscale = 2.4;
+var expSlow = -10;
 
 var t = 1;
 var x,y;
 [x,y] = getPoints();
-console.log(v.ended);
 
 function Run()
 {
-	if(firstplay || v.ended)
-	{
-		firstplay = false
-		ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
-		v.play();
-		setInterval(animateParabola, 350);
-		t=1;
-	}	
+	btn.disabled = true;
+	ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
+	v.play();
+	vidDone = false;
+	runs+=1;
+	console.log(runs);
+	setInterval(animateParabola, 350);
+	t=1;	
 };
 
 
@@ -51,11 +53,11 @@ function animateParabola()
 	{
 		if (t<80/xscale)
 		{
-			setInterval(animateParabola,29*t);
+			setInterval(animateParabola,29*((runs-1)*(x.length-2)+t));
 		}
 		else
 		{
-			setInterval(animateParabola,80*t);
+			setInterval(animateParabola,80*((runs-1)*(x.length-2)+t));
 		}
 	}
 
@@ -84,6 +86,11 @@ function animateParabola()
 	t++
 }
 */
+
+function onVidEnd(e)
+{
+	btn.disabled=false;
+}
 
 
 
