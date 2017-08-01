@@ -2,16 +2,18 @@ var w = 640; var h = 360;
 var vidDone = true;
 var runs = 0;
 
-var elem = document.getElementById("mydiv");
-var params = { width: w, height: h };
-var two = new Two(params).appendTo(elem);
-
 var theCanvas = document.getElementById("vidCanvas")
 var ctx = theCanvas.getContext('2d');
 ctx.lineWidth = 3;
 ctx.strokeStyle = "blue";
 var v = document.getElementById("vid");
 v.addEventListener('ended',onVidEnd,false);
+
+var txt = document.getElementById("text");
+
+var suvat = document.getElementById("suvat");
+
+var btnDiv = document.getElementById("notmydiv");
 
 var comCanvas = document.getElementById("compCanvas");
 var cty = comCanvas.getContext('2d');
@@ -23,14 +25,69 @@ var xscale = 2.13;
 var yscale = 2.4;
 var arrScale = 35;
 
-var tmrInterval = 10.5;
+var tmrInterval = 11.5;
 var tmrDiff = -0.5;
 var timer = new Timer(animateParabola,tmrInterval);
 timer.stop()
 
 var t = 1;
 var x,y;
-[x,y] = getPoints();
+
+window.addEventListener( 'resize', onWindowResize, false );
+
+init();
+
+function init()
+{
+	if (window.innerWidth < 660)
+    {
+    	w = window.innerWidth - 20;
+    	h = w*360/640;
+    }
+    else
+    {
+    	w = 640;
+    	h = 360;
+    }
+
+	[x,y] = getPoints();
+	ctx.clearRect(0,0,theCanvas.width,theCanvas.height);
+	cty.clearRect(0,0,comCanvas.width,comCanvas.height);
+	ctz.clearRect(0,0,comCanvas2.width,comCanvas2.height);
+
+	var pad = ((window.innerWidth-w)/2);
+	var toppad = 80;
+	var btnpad = ((window.innerWidth - btn.clientWidth)/2);
+	var imgpad = (window.innerWidth - suvat.width)/2;
+	v.width = w;
+    v.height = h;
+    v.style.padding = toppad.toString() + "px " + pad.toString() + "px";
+	vidCanvas.style.width = w;
+    vidCanvas.style.height = h;
+    vidCanvas.style.padding = toppad.toString() + "px " + pad.toString() + "px";
+    comCanvas.style.width = w;
+    comCanvas.style.height = h;
+    comCanvas.style.padding = toppad.toString() + "px " + pad.toString() + "px";
+    comCanvas2.style.width = w;
+    comCanvas2.style.height = h;
+    comCanvas2.style.padding = toppad.toString() + "px " + pad.toString() + "px";
+    txt.style.top = toppad + h + 20 + "px";
+    btnDiv.style.top = toppad + h - 5 + "px";
+    //btnDiv.style.left = (window.innerWidth - btn.width)/2;
+    btnDiv.style.width = w;
+    btnDiv.style.padding = "10px " + btnpad.toString() + "px";
+    suvat.style.width = 377*w/640;
+    suvat.style.height = 165*w/640;
+    suvat.style.padding = "0px " + imgpad.toString() + "px";
+
+
+    //vidCanvas.padding = 100;
+
+
+}
+
+
+
 
 function Run()
 {
@@ -96,7 +153,6 @@ function components()
 	/*cty.moveTo(x[t-1],y[t-1]);
 	cty.lineTo(x[t-1],y[t-1]+ (y[t]-y[t-1])*100);*/
 	
-	
 
 	arrow(cty, x[t-1] , y[t-1] , x[t-1]+ (x[t]-x[t-1])*arrScale, y[t-1]);
 	arrow(cty , x[t-1] , y[t-1] , x[t-1] , y[t-1]+ (y[t]-y[t-1])*arrScale);
@@ -146,6 +202,14 @@ function arrow(context, fromx, fromy, tox, toy)
 function onVidEnd(e)
 {
 	btn.disabled=false;
+	cty.clearRect(0,0,comCanvas.width,comCanvas.height);
+	ctz.clearRect(0,0,comCanvas2.width,comCanvas2.height);
+}
+
+function onWindowResize() {
+
+    
+    init();
 }
 
 
