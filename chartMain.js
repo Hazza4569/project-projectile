@@ -17,8 +17,8 @@ var xscale = 2.13;
 var yscale = 2.4;
 var expSlow = -10;
 
-var tmrInterval = 5;
-var tmrDiff = 1;
+var tmrInterval = 7.2;
+var tmrDiff = -1;
 var timer = new Timer(animateParabola,tmrInterval);
 timer.stop()
 
@@ -34,8 +34,8 @@ function Run()
 	vidDone = false;
 	runs+=1;
 	console.log(runs);
-	timer.restart(550);
-	t=1;	
+	timer.restart(500);
+	t=1;
 };
 
 function goGoGadgetAnimate()
@@ -59,7 +59,7 @@ function animateParabola()
 {
 	if (t< x.length - 1)
 	{
-		if (t<80/xscale)
+		if (t<250/xscale)
 		{
 			timer.restart(tmrInterval);
 		}
