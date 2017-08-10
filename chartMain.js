@@ -14,7 +14,6 @@ var txt = document.getElementById("text");
 var suvat = document.getElementById("suvat");
 
 var btnDiv = document.getElementById("notmydiv");
-var btnThrow = document.getElementById("throw");
 var drop = document.getElementById("drop");
 
 var comCanvas = document.getElementById("compCanvas");
@@ -93,20 +92,29 @@ function init()
 
     cntHeight += h + toppad - 5;
     btnDiv.style.top = cntHeight + "px";
-    btnDiv.style.left = pad;
-    btnDiv.style.width = w;
+    //btnDiv.style.left = pad;
+    btnDiv.style.width = pad;
     btnDiv.style.padding = "10px " + pad.toString() + "px";
+
+    drop.style.top = cntHeight + "px";
+    //drop.style.left = pad;
+    drop.style.width = 1;
+    drop.style.padding = "10px " + pad.toString() + "px";
 
     graph.style.width = w;
     graph.style.height = h;
     graph.style.padding = "0px " + pad.toString() + "px";
 
-    cntHeight += 30;
+    cntHeight += 45;
     graph.style.top = cntHeight + "px";
 
-    cntHeight += 320;
+    cntHeight += 320 + 25;
     txt.style.top = cntHeight + "px";
-    txt.style.width = 0.6*window.innerWidth;
+    var txtWidth = (0.6*window.innerWidth)
+    txt.style.width = txtWidth.toString() + "px";
+    txt.style.padding = "10px" + (txtWidth).toString + "px";
+    //txt.style.left = (0.2*window.innerWidth).toString + "px";
+
     
 
 
@@ -167,6 +175,40 @@ function animate()
 	}
 }
 
+function GRAPHS()
+{
+	var f = x;
+	var g, yrange;
+	[g,yrange] = choice(e.options[e.selectedIndex].value,0);
+
+ 	Plotly.plot('graph', [
+ 	{
+   		y: [[g]],
+   		x: [f[0]],
+   		mode: 'lines',
+   		line: {color: '#80CAF6'}
+   		
+	}], 
+	{
+		margin: {t:10,l:10,r:10,b:20},
+		xaxis: {range: [0,320], showticklabels: false,title: 'time'},
+		yaxis: {range: yrange, showticklabels: false},
+		showlegend: false
+	});
+}
+
+function updateGraph()
+{
+	var f = x;
+	var g, yrange;
+	[g,yrange] = choice(e.options[e.selectedIndex].value,t);
+  	Plotly.extendTraces('graph',
+   	{
+   	    y: [[g]],
+   	    x: [[f[t]]]
+   	}, [0])
+}
+
 function components()
 {	
 	cty.clearRect(0,0,comCanvas.width,comCanvas.height);
@@ -192,40 +234,6 @@ function components()
 	// console.log("ARROWS!");
 
 	ctz.stroke();
-}
-
-function GRAPHS()
-{
-	var f = x;
-	var g, yrange;
-	[g,yrange] = choice(e.options[e.selectedIndex].value,0);
-
- 	Plotly.plot('graph', [
- 	{
-   		y: [[g]],
-   		x: [f[0]],
-   		mode: 'lines',
-   		line: {color: '#80CAF6'}
-   		
-	}], 
-	{
-		margin: {t:10,l:10,r:10,b:20},
-		xaxis: {range: [0,320], showticklabels: false},
-		yaxis: {range: yrange, showticklabels: false},
-		showlegend: false
-	});
-}
-
-function updateGraph()
-{
-	var f = x;
-	var g, yrange;
-	[g,yrange] = choice(e.options[e.selectedIndex].value,t);
-  	Plotly.extendTraces('graph',
-   	{
-   	    y: [[g]],
-   	    x: [[f[t]]]
-   	}, [0])
 }
 
 
