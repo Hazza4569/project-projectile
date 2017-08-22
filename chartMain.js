@@ -395,6 +395,6 @@ function choice2(i,j)
     }
     else if (i=="Acceleration")
     {
-        return [-ay[j],ax[j],[-0.3,0.05/Math.pow(numPoints/60,3)]]
+        return [-ay[j],ax[j],[-0.5,0.05/Math.pow(numPoints/60,3)]]
     }
 }
